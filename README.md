@@ -73,6 +73,22 @@ npm run dev
 - `@copilotkit/react-core` 1.83.0、`@copilotkit/runtime` 1.83.0、`@ag-ui/client` 1.0.3
 - Runtime 用 `@copilotkit/runtime/v2` + `createCopilotExpressHandler`（Express 5）
 
+## Agent 评测与优化（第四天）
+
+第四天的工作集中在后端（评测 + 优化），**前端没有 UI 改动**，沿用第三天的 CopilotKit / AG-UI 接入方式。但用户能感知到的对话行为有变化：
+
+| 场景 | 优化前 | 优化后 |
+| ---- | ---- | ---- |
+| 请求含糊（"帮我找一下那个东西"） | 一次性列出全部备忘录 | 先用一句话追问是哪一个 |
+| 要求删除 / 修改 | 说明只读，但多余查了一次数据 | 直接说明只读，不发起任何查询 |
+| 查询出错 | 模型可能重复再试一次 | 只尝试一次，直接告知失败 |
+| 工具层异常 / 参数不合法 | 异常抛到上层，形态不可控 | 返回固定错误码文案（不泄露堆栈） |
+
+- 评测用例与运行方式（后端仓库）：`memo-backend/tests/agent/`
+- 优化记录（基线、改动、前后对比、限制）：`memo-backend/docs/day-4-agent-optimization.md`
+- 结果：同一套 12 个用例，通过 **10/12 → 12/12**，工具调用正确 **4/5 → 5/5**
+- 前端失败提示仍为 CopilotKit 默认样式，未做定制，因此没有额外的状态截图
+
 ## 容器启动（Docker）
 
 ```bash
