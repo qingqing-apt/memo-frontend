@@ -363,3 +363,91 @@ body {
   justify-content: center;
   min-height: 200px;
 }
+
+/* 备忘助手失败兜底提示：CopilotKit 不提供会话级错误回调，这里自行提示 */
+.agent-error {
+  position: fixed;
+  top: 76px;
+  right: 20px;
+  z-index: 60;
+  max-width: 340px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 12px 14px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.agent-error__body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #991b1b;
+}
+
+.agent-error__body span {
+  color: #b91c1c;
+}
+
+.agent-error__close {
+  border: none;
+  background: transparent;
+  color: #991b1b;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 2px;
+}
+
+.agent-error__close:hover {
+  color: #7f1d1d;
+}
+
+/* 备忘助手失败兜底提示：CopilotKit 不提供会话级错误回调，这里自行提示 */
+.agent-error {
+  position: fixed;
+  top: 76px;
+  right: 20px;
+  z-index: 60;
+  max-width: 340px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 12px 14px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.agent-error__body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #991b1b;
+}
+
+.agent-error__body span {
+  color: #b91c1c;
+}
+
+.agent-error__close {
+  border: none;
+  background: transparent;
+  color: #991b1b;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 2px;
+}
+
+.agent-error__close:hover {
+  color: #7f1d1d;
+}
