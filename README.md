@@ -67,6 +67,24 @@ npm run dev
 - `@copilotkit/react-core` 1.83.0、`@copilotkit/runtime` 1.83.0、`@ag-ui/client` 1.0.3
 - Runtime 用 `@copilotkit/runtime/v2` + `createCopilotExpressHandler`（Express 5）
 
+## 容器启动（Docker）
+
+```bash
+# 1. 创建共享网络（与后端仓库共用，只需一次）
+docker network create memo-network
+
+# 2. 在本仓库目录启动（frontend + runtime 两个服务）
+docker compose up -d --build
+```
+
+- 前端 nginx：`http://localhost:8080`
+- Runtime：`http://localhost:3000`
+- 前端经 nginx 反向代理：`/api/copilotkit` → runtime（`http://runtime:3000`）、`/api` → backend（`http://backend:8000`）
+- Runtime 的 `AGENT_URL` 指向共享网络中的后端 `http://backend:8000/agent`
+
+> 需先启动后端 `memo-backend`，且两者在同一个 `memo-network` 网络。
+> ⚠️ 本机当前未安装 Docker，容器配置**尚未实际验证**，安装 Docker 后按上述步骤即可复现。
+
 ## 与后端联调
 
 开发环境通过 Vite 代理转发请求（见 `vite.config.ts`）：
