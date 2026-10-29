@@ -62,6 +62,12 @@ npm run dev
 - Agent 工具只读取后端从 JWT 解析出的 user_id，模型与浏览器都无法指定用户
 - Agent 仅在登录后渲染（`user && <AgentChat/>`），后端鉴权兜底
 
+### 会话行为
+
+- 聊天窗口（CopilotPopup）自带**「新建对话」**按钮，点击会清空当前会话的上下文、开启新对话
+- 会话上下文由 `threadId` 关联，保存在后端**内存快照**中，**刷新页面或服务重启后不保留历史**（今天不要求持久化）
+- 退出登录后 Agent 入口隐藏，本地 token 清除，重新登录会回到全新会话
+
 ### 实际版本
 
 - `@copilotkit/react-core` 1.83.0、`@copilotkit/runtime` 1.83.0、`@ag-ui/client` 1.0.3
