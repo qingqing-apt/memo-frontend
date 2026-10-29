@@ -1,0 +1,28 @@
+services:
+  frontend:
+    build: .
+    container_name: memo-frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - runtime
+    networks:
+      - memo-network
+
+  runtime:
+    build:
+      context: .
+      dockerfile: runtime/Dockerfile
+    container_name: memo-runtime
+    ports:
+      - "3000:3000"
+    environment:
+      # 指向共享网络中的后端服务（容器内服务名可解析）
+      AGENT_URL: http://backend:8000/agent
+      COPILOT_RUNTIME_PORT: "3000"
+    networks:
+      - memo-network
+
+networks:
+  memo-network:
+    external: true
