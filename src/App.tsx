@@ -3,6 +3,7 @@ import { api, clearToken, getToken, setToken } from './api'
 import type { User } from './types'
 import AuthModal from './components/AuthModal'
 import MemoBoard from './components/MemoBoard'
+import AgentChat from './components/AgentChat'
 
 export default function App() {
   const [user, setUser] = useState<User | null>(null)
@@ -68,6 +69,9 @@ export default function App() {
       <main className="main">
         <MemoBoard user={user} onRequireAuth={() => setShowAuth(true)} />
       </main>
+
+      {/* 备忘 Agent：仅在登录后渲染（后端鉴权兜底，未登录无法调用 /agent） */}
+      {user && <AgentChat />}
 
       {showAuth && (
         <AuthModal onLogin={handleLogin} onClose={() => setShowAuth(false)} />
